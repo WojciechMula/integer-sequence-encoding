@@ -1,4 +1,8 @@
 # constant word size [determined]
+#
+# - first byte store number of bits per filed
+# - 4 bytes saves first value in array
+# - next is a array of bitfields - each bitfield contain difference
 
 from minbits import Minbits
 

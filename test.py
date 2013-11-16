@@ -49,7 +49,7 @@ if __name__ == '__main__':
 		Varint(),
 		VarintDiff(),
 		SubsetsFirstMatch(6),
-		#SubsetsGreedy(0),
+		SubsetsGreedy(0),
 		Minbits(),
 		MinbitsDiff(),
 	]
