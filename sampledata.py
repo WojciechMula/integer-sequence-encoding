@@ -4,11 +4,14 @@ import struct
 DIR = 'bindata'
 
 def get_all():
+	names = []
 	for name in os.listdir(DIR):
-		if not name.endswith('.idx'):
-			continue
+		if name.endswith('.idx'):
+			names.append(name)
 
-		yield name, get(name)
+	count = len(names)
+	for index, name in enumerate(sorted(names)):
+		yield index, count, name, get(name)
 
 
 def get(name):
