@@ -37,3 +37,4 @@ class SubsetsFirstMatch(Subsets):
 				i += 1
 
 		return result
+

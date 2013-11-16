@@ -24,6 +24,26 @@ class Subsets(object):
 
 		return bytes
 
+	def decode(self, buffer):
+		list = []
+		prev = 0
+		while not buffer.eof():
+			encoded_value = varint.decode(buffer)
+			have_subset = encoded_value & 0x1
+
+			value = (encoded_value >> 1) + prev
+			prev = value
+
+			list.append(value)
+
+			if have_subset:
+				subset = buffer.get() | (buffer.get() << 8) | (buffer.get() << 16) | (buffer.get() << 24)
+				for i in xrange(32):
+					if subset & (1 << i):
+						list.append(value + i + 1)
+
+		return list
+
 	def find_subsets(self, values):
 		raise NotImplemented()
 
@@ -43,3 +63,4 @@ class Subsets(object):
 		       chr((dword >> 8) & 0xff) + \
 		       chr((dword >> 16) & 0xff) + \
 		       chr((dword >> 24) & 0xff)
+
