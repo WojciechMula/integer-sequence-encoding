@@ -7,6 +7,7 @@ from encoder.subsets_first_match import SubsetsFirstMatch
 from encoder.subsets_greedy import SubsetsGreedy
 from encoder.minbits import Minbits
 from encoder.minbits_diff import MinbitsDiff
+from encoder.combine_two import CombineTwo
 
 
 def main(encoders):
@@ -52,6 +53,14 @@ if __name__ == '__main__':
 		SubsetsGreedy(0),
 		Minbits(),
 		MinbitsDiff(),
+		CombineTwo('varint & subsets first match', 
+			VarintDiff(),
+			SubsetsFirstMatch(6)
+		),
+		CombineTwo('varint & subsets greedy', 
+			VarintDiff(),
+			SubsetsGreedy()
+		),
 	]
 
 	main(encoders)
