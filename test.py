@@ -5,16 +5,26 @@ from encoder.varint import Varint
 from encoder.varint_diff import VarintDiff
 from encoder.subsets_first_match import SubsetsFirstMatch
 from encoder.subsets_greedy import SubsetsGreedy
+from encoder.minbits import Minbits
+from encoder.minbits_diff import MinbitsDiff
+
 
 def main(encoders):
 	summary = dict((encoder.name, 0) for encoder in encoders)
 
 	for index, count, name, values in get_all():
 		print '%s (%d/%d)' % (name, index + 1, count)
+
+		base_size = None
 		for encoder in encoders:
 			name = encoder.name
 			size = encoder.bytes_length(values)
-			#print '* %40s: %10d' % (name, size)
+			if base_size is None:
+				base_size = size
+
+			perc = 100.0 * size/base_size
+
+			print '* %40s: %10d (%0.2f%%)' % (name, size, perc)
 
 			summary[name] += size
 	else:
@@ -28,7 +38,7 @@ def main(encoders):
 			if base_size is None:
 				base_size = size
 
-			perc = 100.0 * (base_size - size)/base_size
+			perc = 100.0 * size/base_size
 
 			print '* %40s: %10d (%0.2f%%)' % (name, size, perc)
 
@@ -40,6 +50,8 @@ if __name__ == '__main__':
 		VarintDiff(),
 		SubsetsFirstMatch(6),
 		#SubsetsGreedy(0),
+		Minbits(),
+		MinbitsDiff(),
 	]
 
 	main(encoders)
