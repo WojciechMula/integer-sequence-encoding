@@ -8,6 +8,8 @@ from encoder.subsets_greedy import SubsetsGreedy
 from encoder.minbits import Minbits
 from encoder.minbits_diff import MinbitsDiff
 from encoder.combine_two import CombineTwo
+from encoder.varnibble import Varnibble
+from encoder.varnibble_diff import VarnibbleDiff
 
 
 def main(encoders):
@@ -50,17 +52,19 @@ if __name__ == '__main__':
 		Varint(),
 		VarintDiff(),
 		SubsetsFirstMatch(6),
-		SubsetsGreedy(0),
-		Minbits(),
+		#SubsetsGreedy(0),
+		#Minbits(),
 		MinbitsDiff(),
-		CombineTwo('varint & subsets first match', 
-			VarintDiff(),
-			SubsetsFirstMatch(6)
-		),
-		CombineTwo('varint & subsets greedy', 
-			VarintDiff(),
-			SubsetsGreedy()
-		),
+		#CombineTwo('varint & subsets first match', 
+		#	VarintDiff(),
+		#	SubsetsFirstMatch(6)
+		#),
+		#CombineTwo('varint & subsets greedy', 
+		#	VarintDiff(),
+		#	SubsetsGreedy()
+		#),
+		Varnibble(),
+		VarnibbleDiff(),
 	]
 
 	main(encoders)
