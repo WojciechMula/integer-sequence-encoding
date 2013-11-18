@@ -6,7 +6,7 @@ class SubsetsFirstMatch(Subsets):
 	def get_name(self):
 		return 'Subsets (first match [cutoff=%d])' % self.cutoff
 
-	name = property(get_name)
+	#name = property(get_name)
 
 	def find_subsets(self, values):
 		"naive first match searching"

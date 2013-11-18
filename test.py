@@ -11,6 +11,9 @@ from encoder.combine_two import CombineTwo
 from encoder.varnibble import Varnibble
 from encoder.varnibble_diff import VarnibbleDiff
 
+from WriterVarint import WriterVarint
+from WriterVarnibble import WriterVarnibble
+
 
 def main(encoders):
 	summary = dict((encoder.name, 0) for encoder in encoders)
@@ -47,24 +50,35 @@ def main(encoders):
 
 
 if __name__ == '__main__':
+	subset_cutoff = 6
 	encoders = [
 		DWord(),
-		Varint(),
-		VarintDiff(),
-		SubsetsFirstMatch(6),
-		#SubsetsGreedy(0),
 		#Minbits(),
-		MinbitsDiff(),
+		#MinbitsDiff(),
+		#Varint(),
+		#VarintDiff(),
+		#Varnibble(),
+		#VarnibbleDiff(),
+		SubsetsFirstMatch('Subsets first match (varint)', subset_cutoff, WriterVarint()),
+		SubsetsFirstMatch('Subsets first match (varnibble)', subset_cutoff, WriterVarnibble()),
+		SubsetsGreedy('Subsets greedy (varint)', 0, WriterVarint()),
+		SubsetsGreedy('Subsets greedy (varnibble)', 0, WriterVarnibble()),
 		#CombineTwo('varint & subsets first match', 
 		#	VarintDiff(),
-		#	SubsetsFirstMatch(6)
+		#	SubsetsFirstMatch('subset', subset_cutoff, WriterVarint())
 		#),
 		#CombineTwo('varint & subsets greedy', 
 		#	VarintDiff(),
-		#	SubsetsGreedy()
+		#	SubsetsGreedy('subset', subset_cutoff, WriterVarint())
 		#),
-		Varnibble(),
-		VarnibbleDiff(),
+		#CombineTwo('varnibble & subsets first match', 
+		#	VarnibbleDiff(),
+		#	SubsetsFirstMatch('subset', subset_cutoff, WriterVarnibble())
+		#),
+		#CombineTwo('varnibble & subsets greedy', 
+		#	VarnibbleDiff(),
+		#	SubsetsGreedy('subset', subset_cutoff, WriterVarnibble())
+		#),
 	]
 
 	main(encoders)

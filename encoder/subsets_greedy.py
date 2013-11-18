@@ -2,12 +2,6 @@ import varint
 from subsets import Subsets
 
 class SubsetsGreedy(Subsets):
-
-	def get_name(self):
-		return 'Subsets (greedy [cutoff=%d])' % self.cutoff
-
-	name = property(get_name)
-
 	def find_subsets(self, values):
 		"greedy best match searching"
 

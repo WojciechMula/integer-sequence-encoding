@@ -1,5 +1,6 @@
 from encoder.subsets_first_match import SubsetsFirstMatch
 from encoder.subsets_greedy import SubsetsGreedy
+from WriterVarint import WriterVarint
 from ByteString import ByteString
 from sampledata import sample
 
@@ -15,6 +16,12 @@ def verify(encoder, values):
 if __name__ == '__main__':
 	values = sample()
 
-	verify(SubsetsFirstMatch(6), values)
-	verify(SubsetsGreedy(0), values)
+	encoders = [
+		SubsetsFirstMatch('first match', 6, WriterVarint()),
+		SubsetsGreedy('greedy', 0, WriterVarint())
+	]
 
+	for encoder in encoders:
+		print "testing", encoder.name
+		verify(encoder, values)
+		print "... OK"

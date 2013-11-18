@@ -1,28 +1,32 @@
 import varint
 
 class Subsets(object):
-	def __init__(self, cutoff = 0):
+	def __init__(self, name, cutoff, writer):
+		self.name   = name
 		self.cutoff = cutoff
+		self.writer = writer
 
 	def bytes_length(self, values):
 		return len(self.encode(values))
 
 	def encode(self, values):
-		bytes = ''
 		prev = 0
+
+		writer = self.writer
+		writer.init()
 		for value, subset in self.find_subsets(values):
 			value_to_encode = (value - prev)*2
 			if subset is not None:
 				# lowest bit is set if subset is present
 				value_to_encode += 1
 
-			bytes += varint.encode(value_to_encode)
+			writer.encode_uint(value_to_encode)
 			if subset is not None:
-				bytes += self.encode_subset(value, subset)
+				writer.append(self.encode_subset(value, subset))
 
 			prev = value
 
-		return bytes
+		return writer.get_bytes()
 
 	def decode(self, buffer):
 		list = []
