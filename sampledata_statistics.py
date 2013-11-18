@@ -38,8 +38,8 @@ print_int(value.min, 'min value')
 print_int(value.max, 'max value')
 
 print
-print 'collection lengths:'
-print_int(length.min, 'min')
-print_int(length.max, 'max')
-
-print_int(int(length.sum/float(length.count)), 'avg')
+print 'collection:'
+print_int(length.count, 'count')
+print_int(length.min, 'min length')
+print_int(length.max, 'max length')
+print_int(int(length.sum/float(length.count)), 'avg length')
