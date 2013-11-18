@@ -5,9 +5,7 @@
 
 from math import log
 
-
 class Minbits:
-	name = 'Min bits'
 
 	def minbits_count(self, values):
 		# minimum bits count to store maximum value from array

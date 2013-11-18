@@ -1,7 +1,6 @@
 # Varint encoding
 
 class Varint:
-	name = 'Varint'
 
 	def bytes_length(self, values):
 		return sum(len(encode(v)) for v in values)

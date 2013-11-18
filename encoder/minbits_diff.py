@@ -8,7 +8,6 @@ from minbits import Minbits
 
 
 class MinbitsDiff(Minbits):
-	name = 'Min bits (diff)'
 
 	def bytes_length(self, values):
 		diff = [curr - prev for prev, curr in zip(values, values[1:])]

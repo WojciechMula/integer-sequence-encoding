@@ -1,6 +1,5 @@
 class CombineTwo(object):
-	def __init__(self, name, encoder1, encoder2):
-		self.name = name
+	def __init__(self, encoder1, encoder2):
 		self.encoder1 = encoder1
 		self.encoder2 = encoder2
 

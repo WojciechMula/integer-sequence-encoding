@@ -16,14 +16,13 @@ from WriterVarnibble import WriterVarnibble
 
 
 def main(encoders):
-	summary = dict((encoder.name, 0) for encoder in encoders)
+	summary = dict((name, 0) for name, encoder in encoders)
 
 	for index, count, name, values in get_all():
 		print '%s (%d/%d)' % (name, index + 1, count)
 
 		base_size = None
-		for encoder in encoders:
-			name = encoder.name
+		for name, encoder in encoders:
 			size = encoder.bytes_length(values)
 			if base_size is None:
 				base_size = size
@@ -38,8 +37,7 @@ def main(encoders):
 		print '=' * 72
 
 		base_size = None
-		for encoder in encoders:
-			name = encoder.name
+		for name, encoder in encoders:
 			size = summary[name]
 			if base_size is None:
 				base_size = size
@@ -52,33 +50,79 @@ def main(encoders):
 if __name__ == '__main__':
 	subset_cutoff = 6
 	encoders = [
-		DWord(),
-		#Minbits(),
-		#MinbitsDiff(),
-		#Varint(),
-		#VarintDiff(),
-		#Varnibble(),
-		#VarnibbleDiff(),
-		SubsetsFirstMatch('Subsets first match (varint)', subset_cutoff, WriterVarint()),
-		SubsetsFirstMatch('Subsets first match (varnibble)', subset_cutoff, WriterVarnibble()),
-		SubsetsGreedy('Subsets greedy (varint)', 0, WriterVarint()),
-		SubsetsGreedy('Subsets greedy (varnibble)', 0, WriterVarnibble()),
-		#CombineTwo('varint & subsets first match', 
-		#	VarintDiff(),
-		#	SubsetsFirstMatch('subset', subset_cutoff, WriterVarint())
-		#),
-		#CombineTwo('varint & subsets greedy', 
-		#	VarintDiff(),
-		#	SubsetsGreedy('subset', subset_cutoff, WriterVarint())
-		#),
-		#CombineTwo('varnibble & subsets first match', 
-		#	VarnibbleDiff(),
-		#	SubsetsFirstMatch('subset', subset_cutoff, WriterVarnibble())
-		#),
-		#CombineTwo('varnibble & subsets greedy', 
-		#	VarnibbleDiff(),
-		#	SubsetsGreedy('subset', subset_cutoff, WriterVarnibble())
-		#),
+		('32-bit words',
+			DWord()
+		),
+
+		('Varint',
+			Varint()
+		),
+
+		('Varint [diff]',
+			VarintDiff()
+		),
+
+		('#Minimum number of bits',
+			Minbits()
+		),
+
+		('Minimum number of bits [diff]',
+			MinbitsDiff()
+		),
+
+		('Varnibble',
+			Varnibble()
+		),
+
+		('Varnibble [diff]',
+			VarnibbleDiff()
+		),
+
+		('Subsets (first match, varint)',
+			SubsetsFirstMatch(subset_cutoff, WriterVarint())
+		),
+
+		('Subsets (first match, varnibble)',
+			SubsetsFirstMatch(subset_cutoff, WriterVarnibble())
+		),
+
+		('Subsets (greedy, varint)',
+			SubsetsGreedy(subset_cutoff, WriterVarint())
+		),
+
+		('Subsets (greedy, varnibble)',
+			SubsetsGreedy(subset_cutoff, WriterVarnibble())
+		),
+
+		('best: Subsets (first match) or varint',
+			CombineTwo(
+				VarintDiff(),
+				SubsetsFirstMatch(subset_cutoff, WriterVarint())
+			)
+		),
+
+		('best: Subsets (greedy) or varint',
+			CombineTwo(
+				VarintDiff(),
+				SubsetsGreedy(subset_cutoff, WriterVarint())
+			)
+		),
+
+		('best: Subsets (first match) or varnibble',
+			CombineTwo(
+				VarnibbleDiff(),
+				SubsetsFirstMatch(subset_cutoff, WriterVarnibble())
+			)
+		),
+
+		('best: Subsets (greedy) or varnibble',
+			CombineTwo(
+				VarnibbleDiff(),
+				SubsetsGreedy(subset_cutoff, WriterVarnibble())
+			)
+		),
 	]
+
+	encoders = [(name, enc) for name, enc in encoders if name[0] != '#']
 
 	main(encoders)

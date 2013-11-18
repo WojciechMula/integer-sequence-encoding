@@ -3,8 +3,6 @@
 from varint import encode
 
 class VarintDiff:
-	name = 'Varint (diff)'
-
 	def bytes_length(self, values):
 		size = 0
 		last = 0

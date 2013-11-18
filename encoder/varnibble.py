@@ -1,7 +1,6 @@
 # Varnibble encoding
 
 class Varnibble:
-	name = 'Varnibble'
 
 	def bytes_length(self, values):
 		nibbles = sum(encode_length(v) for v in values)

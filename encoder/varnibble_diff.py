@@ -3,7 +3,6 @@
 from varnibble import encode_length
 
 class VarnibbleDiff:
-	name = 'Varnibble (diff)'
 
 	def bytes_length(self, values):
 		nibbles = 0

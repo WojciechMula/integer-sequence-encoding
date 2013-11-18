@@ -1,8 +1,7 @@
 import varint
 
 class Subsets(object):
-	def __init__(self, name, cutoff, writer):
-		self.name   = name
+	def __init__(self, cutoff, writer):
 		self.cutoff = cutoff
 		self.writer = writer
 
