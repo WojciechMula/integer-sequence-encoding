@@ -3,7 +3,7 @@ class StatisticsCSV:
 	def __init__(self, names):
 		self.names = names
 
-		print '# id, ', ', '.join('"%s"' % name for name in self.names)
+		print '# "id", ', ', '.join('"%s"' % name for name in self.names)
 
 
 	def write_item(self, name, num, total, item):
