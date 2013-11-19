@@ -1,3 +1,5 @@
+import sys
+
 from sampledata import get_all
 
 from encoder.dword import DWord
@@ -14,40 +16,27 @@ from encoder.varnibble_diff import VarnibbleDiff
 from WriterVarint import WriterVarint
 from WriterVarnibble import WriterVarnibble
 
+from StatisticsDisplay import StatisticsDisplay
+from StatisticsCSV import StatisticsCSV
 
-def main(encoders):
+
+def main(encoders, printer):
 	summary = dict((name, 0) for name, encoder in encoders)
 
 	for index, count, name, values in get_all():
-		print '%s (%d/%d)' % (name, index + 1, count)
+		item = {}
 
-		base_size = None
-		for name, encoder in encoders:
+		for enc_name, encoder in encoders:
 			size = encoder.bytes_length(values)
-			if base_size is None:
-				base_size = size
+			item[enc_name] = size
+			summary[enc_name] += size
 
-			perc = 100.0 * size/base_size
-
-			print '* %40s: %10d (%0.2f%%)' % (name, size, perc)
-
-			summary[name] += size
+		printer.write_item(name, index + 1, count, item)
 	else:
-		print
-		print '=' * 72
-
-		base_size = None
-		for name, encoder in encoders:
-			size = summary[name]
-			if base_size is None:
-				base_size = size
-
-			perc = 100.0 * size/base_size
-
-			print '* %40s: %10d (%0.2f%%)' % (name, size, perc)
+		printer.write_summary(summary)
 
 
-if __name__ == '__main__':
+def get_encoders():
 	subset_cutoff = 6
 	encoders = [
 		('32-bit words',
@@ -125,4 +114,17 @@ if __name__ == '__main__':
 
 	encoders = [(name, enc) for name, enc in encoders if name[0] != '#']
 
-	main(encoders)
+	return encoders
+
+
+if __name__ == '__main__':
+
+	if '--csv' in sys.argv[1:]:
+		PrinterClass = StatisticsCSV
+	else:
+		PrinterClass = StatisticsDisplay
+
+	encoders = get_encoders()
+	printer  = PrinterClass([name for name, end in encoders])
+
+	main(encoders, printer)
