@@ -1,5 +1,7 @@
 import sys
 
+from collections import OrderedDict
+
 from sampledata import get_all
 
 from encoder.dword import DWord
@@ -21,7 +23,10 @@ from StatisticsCSV import StatisticsCSV
 
 
 def main(encoders, printer):
-	summary = dict((name, 0) for name, encoder in encoders)
+
+	summary = OrderedDict()
+	for name, encoder in encoders:
+		summary[name] = 0
 
 	for index, count, name, values in get_all():
 		item = {}

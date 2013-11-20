@@ -1,6 +1,6 @@
 class StatisticsDisplay:
 	def __init__(self, names):
-		self.names = sorted(names)
+		self.names = names
 		self.name_len = max(map(len, self.names))
 
 
