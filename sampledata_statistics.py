@@ -9,9 +9,12 @@ class Stats:
 
 value  = Stats()
 length = Stats()
+all_values = set()
 
 for i, count, name, values in get_all():
 	value.count += 1
+
+	all_values.update(set(values))
 
 	if value.min is None:
 		value.min = min(values)
@@ -30,12 +33,13 @@ for i, count, name, values in get_all():
 
 
 def print_int(value, label):
-	print '%10s: %d' % (label, value)
+	print '%20s: %d' % (label, value)
 
 print 'values:'
 print_int(value.count, 'count')
 print_int(value.min, 'min value')
 print_int(value.max, 'max value')
+print_int(len(all_values), 'distinct values')
 
 print
 print 'collection:'
