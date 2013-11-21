@@ -71,9 +71,35 @@ for name, (column1_name, column2_name) in plots.iteritems():
 			equal += 1
 			sum_equal += size1
 
-	print
 	print title
-	print '* compression: %.2f%%' % (100.0*sum1/sum2)
-	print '*     greater: %10d %7.2f%% %10d' % (greater, 100.0*greater/length, sum_greater)
-	print '*       equal: %10d %7.2f%% %10d' % (equal,   100.0*equal/length, sum_equal)
-	print '*        less: %10d %7.2f%% %10d' % (less,    100.0*less/length, sum_less)
+	print """
++---------+-------+-----------+----------------+----------------+
+|         | count | count [%%] |    size [B]    |    size [%%]    |
++=========+=======+===========+================+========+=======+
+| greater | %(gt_c)3d   | %(gt_p)5.2f     | %(gt_s)7s        | %(gt_sp)5.2f  |       |
++---------+-------+-----------+----------------+--------+ %(gt_eq_sp)5.2f |
+| equal   | %(eq_c)3d   | %(eq_p)5.2f     | %(eq_s)7s        | %(eq_sp)5.2f  |       |
++---------+-------+-----------+----------------+--------+-------+
+| less    | %(lt_c)3d   | %(lt_p)5.2f     | %(lt_s)7s        | %(lt_sp)5.2f          |
++---------+-------+-----------+----------------+----------------+
+| total size                  | %(sum1)7s                         |
++-----------------------------+---------------------------------+
+| compression                 | %(compression)5.2f%%                          |
++-----------------------------+---------------------------------+
+""" % {
+	'gt_c' : greater,
+	'eq_c' : equal,
+	'lt_c' : less,
+	'gt_p' : 100.0*greater/length,
+	'eq_p' : 100.0*equal/length,
+	'lt_p' : 100.0*less/length,
+	'gt_s' : '{:,}'.format(sum_greater),
+	'eq_s' : '{:,}'.format(sum_equal),
+	'lt_s' : '{:,}'.format(sum_less),
+	'gt_sp': (100.0 * sum_greater/sum1),
+	'eq_sp': (100.0 * sum_equal/sum1),
+	'lt_sp': (100.0 * sum_less/sum1),
+	'gt_eq_sp': (100.0 * (sum_greater + sum_equal)/sum1),
+	'sum1' : '{:,}'.format(sum1),
+	'compression': (100.0*sum1/sum2),
+}
