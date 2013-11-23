@@ -4,7 +4,7 @@ class VarBits(object):
 		best_bits_len = self.get_bits_len(best_bits, values)
 
 		# find shortest representation
-		for bits in xrange(2, 16):
+		for bits in xrange(2, 17):
 
 			bits_len = self.get_bits_len(bits, values)
 			if bits_len < best_bits_len:

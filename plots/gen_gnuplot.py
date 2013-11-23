@@ -32,6 +32,21 @@ plot '%(file)s' using %(column)d with lines lt rgb "blue"
 
 	return SCRIPT % locals()
 
+def get_histogram_script(file, output):
+	SCRIPT = """
+set terminal png medium size 720,480
+
+set output "%(output)s"
+set xlabel "data bits"
+set ylabel "number of list"
+set xrange [1:14]
+unset key
+
+plot '%(file)s' using 2 with lines lt rgb "blue"
+"""
+
+	return SCRIPT % locals()
+
 
 def comparision():
 	plots = {
@@ -82,6 +97,17 @@ def size():
 	os.system("gnuplot %s" % filename)
 
 
+def histogram():
+	name = 'varbits_histogram'
+	filename = name + '.gnuplot'
+	with open(filename, 'w') as f:
+		script = get_histogram_script('varbits_histogram.csv', name + '.png')
+		f.write(script)
+
+	os.system("gnuplot %s" % filename)
+
+
 if __name__ == '__main__':
 	comparision()
 	size()
+	histogram()
