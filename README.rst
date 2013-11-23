@@ -1,3 +1,12 @@
+Programs and sample data used to research some types of encoding
+set of unsigned integers.
+
+Detailed article: http://0x80.pl/articles/integer-sequence-encoding.html
+
+
+Short results
+------------------------------------------------------------------------
+
 ::
 
 *                             32-bit words:    2429252 (100.00%)
