@@ -14,6 +14,8 @@ from encoder.minbits_diff import MinbitsDiff
 from encoder.combine_two import CombineTwo
 from encoder.varnibble import Varnibble
 from encoder.varnibble_diff import VarnibbleDiff
+from encoder.varbits import VarBits
+from encoder.varbits_diff import VarBitsDiff
 
 from WriterVarint import WriterVarint
 from WriterVarnibble import WriterVarnibble
@@ -56,6 +58,14 @@ def get_encoders():
 			VarintDiff()
 		),
 
+		('VarBits',
+			VarBits()
+		),
+
+		('VarBits [diff]',
+			VarBitsDiff()
+		),
+
 		('#Minimum number of bits',
 			Minbits()
 		),
@@ -80,11 +90,11 @@ def get_encoders():
 			SubsetsFirstMatch(subset_cutoff, WriterVarnibble())
 		),
 
-		('Subsets (greedy, varint)',
+		('#Subsets (greedy, varint)',
 			SubsetsGreedy(subset_cutoff, WriterVarint())
 		),
 
-		('Subsets (greedy, varnibble)',
+		('#Subsets (greedy, varnibble)',
 			SubsetsGreedy(subset_cutoff, WriterVarnibble())
 		),
 
@@ -95,7 +105,7 @@ def get_encoders():
 			)
 		),
 
-		('best: Subsets (greedy) or varint',
+		('#best: Subsets (greedy) or varint',
 			CombineTwo(
 				VarintDiff(),
 				SubsetsGreedy(subset_cutoff, WriterVarint())
@@ -109,7 +119,7 @@ def get_encoders():
 			)
 		),
 
-		('best: Subsets (greedy) or varnibble',
+		('#best: Subsets (greedy) or varnibble',
 			CombineTwo(
 				VarnibbleDiff(),
 				SubsetsGreedy(subset_cutoff, WriterVarnibble())

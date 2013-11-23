@@ -17,13 +17,15 @@ def load_csv(name):
 data = load_csv('results.csv')
 length = len(data)
 
-
 plots = {
 	'bitfields_vs_varint':
 		(bitfields, varint_diff),
 
 	'varnibble_vs_varint':
 		(varnibble_diff, varint_diff),
+
+	'varbits_vs_varint':
+		(varbits_diff, varint_diff),
 
 	'subsets_varnibble_vs_varint':
 		(subsets_first_match_varnibble, varint_diff),

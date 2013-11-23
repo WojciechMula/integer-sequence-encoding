@@ -3,6 +3,8 @@
 dwords = "32-bit words"
 varint = "Varint"
 varint_diff = "Varint [diff]"
+varbits = "VarBits"
+varbits_diff = "VarBits [diff]"
 bitfields = "Minimum number of bits [diff]"
 varnibble = "Varnibble"
 varnibble_diff = "Varnibble [diff]"
@@ -16,21 +18,18 @@ best_subsets_first_match_or_varnibble = "best: Subsets (first match) or varnibbl
 best_subsets_greedy_or_varnibble = "best: Subsets (greedy) or varnibble"
 
 COLUMNS = [
-	"id",
-	"32-bit words",
+	"id",  "32-bit words",
 	"Varint",
 	"Varint [diff]",
+	"VarBits",
+	"VarBits [diff]",
 	"Minimum number of bits [diff]",
 	"Varnibble",
 	"Varnibble [diff]",
 	"Subsets (first match, varint)",
 	"Subsets (first match, varnibble)",
-	"Subsets (greedy, varint)",
-	"Subsets (greedy, varnibble)",
 	"best: Subsets (first match) or varint",
-	"best: Subsets (greedy) or varint",
-	"best: Subsets (first match) or varnibble",
-	"best: Subsets (greedy) or varnibble",
+	"best: Subsets (first match) or varnibble"
 ]
 
 def get_column_index(name):
