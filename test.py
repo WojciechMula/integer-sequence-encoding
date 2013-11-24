@@ -5,17 +5,13 @@ from collections import OrderedDict
 from sampledata import get_all
 
 from encoder.dword import DWord
-from encoder.varint import Varint
-from encoder.varint_diff import VarintDiff
+from encoder.varint import Varint, VarintDiff
 from encoder.subsets_first_match import SubsetsFirstMatch
 from encoder.subsets_greedy import SubsetsGreedy
-from encoder.minbits import Minbits
-from encoder.minbits_diff import MinbitsDiff
+from encoder.minbits import Minbits, MinbitsDiff
 from encoder.combine_two import CombineTwo
-from encoder.varnibble import Varnibble
-from encoder.varnibble_diff import VarnibbleDiff
-from encoder.varbits import VarBits
-from encoder.varbits_diff import VarBitsDiff
+from encoder.varnibble import Varnibble, VarnibbleDiff
+from encoder.varbits import VarBits, VarBitsDiff
 from encoder.pair import Pair, PairDiff
 
 from WriterVarint import WriterVarint

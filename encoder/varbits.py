@@ -1,4 +1,6 @@
-class VarBits(object):
+from encoder import Encoder
+
+class VarBits(Encoder):
 	def bytes_length(self, values):
 		best_bits = 1
 		best_bits_len = self.get_bits_len(best_bits, values)
@@ -14,10 +16,19 @@ class VarBits(object):
 		# save 1 byte - number of bits, then rest varbits array
 		return 1 + (best_bits_len + best_bits - 1)/8
 
+
 	def get_bits_len(self, bits, values):
 		limit = 2**bits - 1
 		
 		return sum(get_bits_len(v, bits, limit) for v in values)
+
+
+class VarBitsDiff(VarBits):
+	def bytes_length(self, values):
+		diff = self.calculate_diff(values)
+
+		return super(VarBitsDiff, self).bytes_length(diff)
+
 
 
 def get_bits_len(value, bits, limit):

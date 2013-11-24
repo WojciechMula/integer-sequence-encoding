@@ -1,4 +1,6 @@
-class CombineTwo(object):
+from encoder import Encoder
+
+class CombineTwo(Encoder):
 	def __init__(self, encoder1, encoder2):
 		self.encoder1 = encoder1
 		self.encoder2 = encoder2

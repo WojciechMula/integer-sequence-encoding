@@ -1,9 +1,18 @@
-# Varint encoding
+from encoder import Encoder
 
-class Varint:
+class Varint(Encoder):
+	"Varint encoding"
 
 	def bytes_length(self, values):
 		return sum(len(encode(v)) for v in values)
+
+
+class VarintDiff(Varint):
+	"Varint with difference encoding"
+
+	def bytes_length(self, values):
+		diff = self.calculate_diff(values)
+		return super(VarintDiff, self).bytes_length(diff)
 
 
 def encode(value):

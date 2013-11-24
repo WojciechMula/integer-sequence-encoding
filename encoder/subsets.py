@@ -1,6 +1,7 @@
+from encoder import Encoder
 import varint
 
-class Subsets(object):
+class Subsets(Encoder):
 	def __init__(self, cutoff, writer):
 		self.cutoff = cutoff
 		self.writer = writer
