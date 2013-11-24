@@ -16,6 +16,7 @@ from encoder.varnibble import Varnibble
 from encoder.varnibble_diff import VarnibbleDiff
 from encoder.varbits import VarBits
 from encoder.varbits_diff import VarBitsDiff
+from encoder.pair import Pair, PairDiff
 
 from WriterVarint import WriterVarint
 from WriterVarnibble import WriterVarnibble
@@ -125,6 +126,14 @@ def get_encoders():
 				SubsetsGreedy(subset_cutoff, WriterVarnibble())
 			)
 		),
+
+		('Pair [varint]',
+			PairDiff(WriterVarint())
+		),
+
+		('Pair [varnibble]',
+			PairDiff(WriterVarnibble())
+		)
 	]
 
 	encoders = [(name, enc) for name, enc in encoders if name[0] != '#']

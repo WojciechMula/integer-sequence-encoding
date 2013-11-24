@@ -21,3 +21,6 @@ Short results
 *         Subsets (first match, varnibble):     365738 (15.06%)
 *    best: Subsets (first match) or varint:     368778 (15.18%)
 * best: Subsets (first match) or varnibble:     337743 (13.90%)
+*                            Pair [varint]:     443892 (18.27%)
+*                         Pair [varnibble]:     418659 (17.23%)
+

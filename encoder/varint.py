@@ -20,6 +20,10 @@ def encode(value):
 	return bytes
 
 
+def encoded_size(value):
+	return len(encode(value))
+
+
 def decode(buffer):
 	value = 0
 	shift = 0
