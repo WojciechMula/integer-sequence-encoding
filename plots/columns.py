@@ -16,6 +16,8 @@ best_subsets_first_match_or_varint = "best: Subsets (first match) or varint"
 best_subsets_greedy_or_varint = "best: Subsets (greedy) or varint"
 best_subsets_first_match_or_varnibble = "best: Subsets (first match) or varnibble"
 best_subsets_greedy_or_varnibble = "best: Subsets (greedy) or varnibble"
+pair_varint = "Pair [varint]"
+pair_varnibble = "Pair [varnibble]"
 
 COLUMNS = [
 	"id",  "32-bit words",
@@ -29,7 +31,9 @@ COLUMNS = [
 	"Subsets (first match, varint)",
 	"Subsets (first match, varnibble)",
 	"best: Subsets (first match) or varint",
-	"best: Subsets (first match) or varnibble"
+	"best: Subsets (first match) or varnibble",
+	"Pair [varint]",
+	"Pair [varnibble]"
 ]
 
 def get_column_index(name):

@@ -17,7 +17,7 @@ def load_csv(name):
 data = load_csv('results.csv')
 length = len(data)
 
-plots = {
+data_sets = {
 	'bitfields_vs_varint':
 		(bitfields, varint_diff),
 
@@ -38,10 +38,16 @@ plots = {
 
 	'best_subsets_varint_vs_varint':
 		(best_subsets_first_match_or_varint, varint_diff),
+
+	'pair_varint':
+		(pair_varint, varint_diff),
+
+	'pair_varnibble':
+		(pair_varnibble, varint_diff),
 }
 
 
-for name, (column1_name, column2_name) in plots.iteritems():
+for name, (column1_name, column2_name) in data_sets.iteritems():
 	column1 = get_column_index(column1_name)
 	column2 = get_column_index(column2_name)
 	title = '%s vs %s' % (column1_name, column2_name)
